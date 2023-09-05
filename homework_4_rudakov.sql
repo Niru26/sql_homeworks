@@ -1,10 +1,34 @@
 use seminar_geekbrains;
 select *
 from likes;
--- count total likes, age less than 12
+-- TASK 1: count total likes, age less than 12
 select 
 	count(media_id) as total_likes
 from likes
 left join profiles
 	using (user_id)
-where birthday > '2011-01-01'
+where birthday > '2011-01-01';
+
+-- TASK 2: who liked more
+select * 
+from profiles
+join likes
+	using (user_id); -- show all records
+    
+select
+	'Female' as sex,
+	count(gender) as likes
+from profiles
+join likes
+	using (user_id)
+where gender = 'f'
+union
+select
+	'Male' as sex,
+	count(gender) as likes
+from profiles
+join likes
+	using (user_id)
+where gender = 'm'
+
+-- TASK 3: show all user not sending messages
