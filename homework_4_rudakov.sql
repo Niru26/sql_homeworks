@@ -32,8 +32,8 @@ join likes
 where gender = 'm';
 
 -- TASK 3: show all user not sending messages
-select * 
+select *
 from profiles as p
 left join messages as m
 	on p.user_id = m.from_user_id
--- where from_user_id = null
+where from_user_id is null
