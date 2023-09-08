@@ -13,10 +13,11 @@ where p.birthday > '2003-01-01';
 select
 	u.firstname,
     u.lastname,
-	sum(from_user_id)
-	over (
+	sum(from_user_id) over (
 		partition by from_user_id
-        order by firstname) as 'messages_quantity'
+        order by firstname) as 'messages_quantity',
+	dense_rank() over (
+		partition by firstname) as 'rank'
 from messages m
 left join users u
 	on m.from_user_id = u.id;
