@@ -17,7 +17,8 @@ select
 		partition by from_user_id
         order by firstname) as 'messages_quantity',
 	dense_rank() over (
-		partition by firstname) as 'rank'
+		partition by firstname
+        order by m.id) as 'rank'
 from messages m
 left join users u
 	on m.from_user_id = u.id;
