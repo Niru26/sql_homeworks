@@ -10,7 +10,13 @@ left join users u
 where p.birthday > '2003-01-01';
 
 -- task 2
-select 
+select
+	u.firstname,
+    u.lastname,
+	sum(from_user_id)
+	over (
+		partition by from_user_id
+        order by firstname) as 'messages_quantity'
 from messages m
 left join users u
 	on m.from_user_id = u.id;
